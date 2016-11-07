@@ -9,6 +9,6 @@ Completed user stories:
  Required: The Edit activity now works per the project specifications
  
 
-![alt tag](http://i.imgur.com/srTyBsq.gif)
+![alt tag](http://i.imgur.com/Zo21its.gif)
 
 
