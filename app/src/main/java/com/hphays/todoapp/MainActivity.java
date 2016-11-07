@@ -1,5 +1,6 @@
 package com.hphays.todoapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
@@ -40,11 +41,27 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                launchComposeView(position, items);
+            }
+        });
     }
     public void populateArrayItems() {
         readItems();
         itemsAdaptor = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, items);
 
+    }
+
+    // ActivityOne.java
+    public void launchComposeView() {
+        // first parameter is the context, second is the class of the activity to launch
+        Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+        i.putExtra("text", "foobar");
+        i.putExtra("in_reply_to", "george");
+        startActivity(i); // brings up the second activity
     }
 
     private void readItems() {
@@ -53,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             items = new ArrayList<String>(FileUtils.readLines(file));
         } catch (IOException e) {
-items = new ArrayList<String>();
+            items = new ArrayList<String>();
         }
     }
 
@@ -63,7 +80,7 @@ items = new ArrayList<String>();
         try {
             FileUtils.writeLines(file, items);
         } catch (IOException e) {
-e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
